@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from "next/link";
 export default function Home() {
   return (
     <div className="p-4  text-center">
@@ -7,6 +7,9 @@ export default function Home() {
       <p className="text-base sm:text-lg lg:text-xl">
         This text adjusts size based on screen width.
       </p>
+      <Link href="/about">
+        <button>Go to about page</button>
+      </Link>
     </div>
   );
 }
