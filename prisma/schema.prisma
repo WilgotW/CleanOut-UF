@@ -17,5 +17,6 @@ model Review {
   id  Int @id @default(autoincrement())
   name String
   content String
+  stars Float
   createdAt DateTime @default(now())
 }

@@ -10,6 +10,9 @@ export default function Home() {
       <Link href="/about">
         <button>Go to about page</button>
       </Link>
+      <Link href="/review-form">
+        <button>Write an review!</button>
+      </Link>
     </div>
   );
 }
