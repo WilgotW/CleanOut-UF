@@ -1,4 +1,4 @@
-import { createReview } from "@/app/services/ReviewService";
+import { createReview } from "@/services/ReviewService";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function hande(req: NextApiRequest, res: NextApiResponse) {

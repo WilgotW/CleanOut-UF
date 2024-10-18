@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse, NextPage } from "next";
-import { deleteReview } from "@/app/services/ReviewService";
+import { deleteReview } from "@/services/ReviewService";
 
 export default async function handler(
   req: NextApiRequest,
