@@ -7,12 +7,17 @@ export default function Home() {
       <p className="text-base sm:text-lg lg:text-xl">
         This text adjusts size based on screen width.
       </p>
-      <Link href="/about">
-        <button>Go to about page</button>
-      </Link>
-      <Link href="/review-form">
-        <button>Write an review!</button>
-      </Link>
+      <div className="flex flex-col">
+        <Link href="/about">
+          <button>Go to about page</button>
+        </Link>
+        <Link href="/review-form">
+          <button>Write an review!</button>
+        </Link>
+        <Link href="/price-plans">
+          <button>Book car wash!</button>
+        </Link>
+      </div>
     </div>
   );
 }
