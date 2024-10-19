@@ -1,4 +1,4 @@
-import prisma from "../app/config/prisma";
+import prisma from "../config/prisma";
 
 export async function createReview(
   name: string,

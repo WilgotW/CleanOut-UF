@@ -74,6 +74,7 @@ export default function page() {
       <h1>Create an review!</h1>
       <input
         type="text"
+        className="text-black"
         placeholder="enter your name..."
         value={name}
         onChange={(ev) => setName(ev.target.value)}
