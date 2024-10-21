@@ -1,7 +1,10 @@
 import { createReview } from "@/services/ReviewService";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function hande(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === "POST") {
     const { name, content, stars } = req.body;
 
