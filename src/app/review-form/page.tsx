@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 interface StarComponent {
   id: number;
@@ -62,64 +64,75 @@ export default function Page() {
   }, []);
 
   return (
-    <div>
-      <h1>Create a review!</h1>
-      <input
-        type="text"
-        className="text-black"
-        placeholder="enter your name..."
-        value={name}
-        onChange={(ev) => setName(ev.target.value)}
-      />
-      <input
-        type="text"
-        className="text-black"
-        placeholder="write review"
-        value={content}
-        onChange={(ev) => setContent(ev.target.value)}
-      />
-      <div>{stars}</div>
-      <div className="flex gap-2">
-        {starsComponents.map((star, i) => (
-          <div key={i} className="relative w-10 h-10 cursor-pointer">
-            <svg
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full"
-              onClick={() => fillStars(star.id, false)}
-            >
-              <defs>
-                <linearGradient
-                  id={`half-fill-${i}`}
-                  x1="0"
-                  y1="0"
-                  x2="100%"
-                  y2="0"
-                >
-                  <stop offset="50%" stopColor="#ffc107" />
-                  <stop offset="50%" stopColor="#ccc" />
-                </linearGradient>
-              </defs>
-              <path
-                fill={
-                  star.filled
-                    ? "#ffc107"
-                    : star.half
-                    ? `url(#half-fill-${i})`
-                    : "#ccc"
-                }
-                d="M12 .587l3.668 7.568L24 9.267l-6 5.832 1.417 8.256L12 18.897l-7.417 4.458L6 15.099 0 9.267l8.332-1.112z"
-              />
-            </svg>
-            <div
-              className="absolute left-0 top-0 w-1/2 h-full cursor-pointer"
-              onClick={() => fillStars(star.id, true)}
-            ></div>
-          </div>
-        ))}
+    <div className="flex justify-center p-5">
+      <div className="flex flex-col w-96 gap-8">
+        <h1 className="text-xl">Write a review!</h1>
+        <TextField
+          id="standard-basic"
+          label="Your name"
+          variant="standard"
+          value={name}
+          onChange={(ev) => setName(ev.target.value)}
+        />
+        <TextField
+          value={content}
+          onChange={(ev) => setContent(ev.target.value)}
+          label="Write review"
+          variant="outlined"
+          multiline
+          rows={8}
+          fullWidth
+        />
+
+        <div className="flex gap-2">
+          {starsComponents.map((star, i) => (
+            <div key={i} className="relative w-10 h-10 cursor-pointer">
+              <svg
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full h-full"
+                onClick={() => fillStars(star.id, false)}
+              >
+                <defs>
+                  <linearGradient
+                    id={`half-fill-${i}`}
+                    x1="0"
+                    y1="0"
+                    x2="100%"
+                    y2="0"
+                  >
+                    <stop offset="50%" stopColor="#ffc107" />
+                    <stop offset="50%" stopColor="#ccc" />
+                  </linearGradient>
+                </defs>
+                <path
+                  fill={
+                    star.filled
+                      ? "#ffc107"
+                      : star.half
+                      ? `url(#half-fill-${i})`
+                      : "#ccc"
+                  }
+                  d="M12 .587l3.668 7.568L24 9.267l-6 5.832 1.417 8.256L12 18.897l-7.417 4.458L6 15.099 0 9.267l8.332-1.112z"
+                />
+              </svg>
+              <div
+                className="absolute left-0 top-0 w-1/2 h-full cursor-pointer"
+                onClick={() => fillStars(star.id, true)}
+              ></div>
+            </div>
+          ))}
+        </div>
+        <Button
+          onClick={(ev) => postReview(ev)}
+          className="w-full"
+          variant="contained"
+        >
+          Post review
+        </Button>
+
+        <div>{message}</div>
       </div>
-      <button onClick={(ev) => postReview(ev)}>Post review</button>
-      <div>{message}</div>
     </div>
   );
 }
