@@ -1,5 +1,15 @@
 import prisma from "../config/prisma";
 
+export async function getLatest(amount: number) {
+  const reviews = await prisma.review.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: amount,
+  });
+  return reviews;
+}
+
 export async function createReview(
   name: string,
   content: string,
