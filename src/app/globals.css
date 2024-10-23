@@ -25,3 +25,9 @@ body {
     text-wrap: balance;
   }
 } */
+.half-star {
+  background: linear-gradient(to right, #ffc107 50%, transparent 50%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent; /* Ensures the background color fills the star */
+}

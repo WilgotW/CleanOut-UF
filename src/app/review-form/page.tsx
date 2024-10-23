@@ -5,38 +5,31 @@ import { useEffect, useState } from "react";
 interface StarComponent {
   id: number;
   filled: boolean;
+  half: boolean;
 }
 
-export default function page() {
+export default function Page() {
   const [name, setName] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [stars, setStars] = useState<number>(0);
 
-  const halfStars = 10;
+  const totalStars = 5;
   const [starsComponents, setStarComponents] = useState<StarComponent[]>([]);
-
   const [message, setMessage] = useState<string>("");
 
-  const [reviews, setReviews] = useState([]);
-
-  function fillStars(id: number) {
-    let updatedStars: StarComponent[] = [...starsComponents];
-    for (let i = 0; i < starsComponents.length; i++) {
-      if (id === 0 || i > id) {
-        updatedStars[i].filled = false;
+  function fillStars(id: number, isHalf: boolean) {
+    let updatedStars = starsComponents.map((star, index) => {
+      if (index < id) {
+        return { ...star, filled: true, half: false };
+      } else if (index === id) {
+        return { ...star, filled: !isHalf, half: isHalf };
       } else {
-        updatedStars[i].filled = true;
+        return { ...star, filled: false, half: false };
       }
-    }
-    setStarComponents([...updatedStars]);
-    setStars((id + 1) / 2);
+    });
+    setStarComponents(updatedStars);
+    setStars(id + (isHalf ? 0.5 : 1));
   }
-
-  // async function fetchReviews() {
-  //   const response = await fetch("/api/reviews");
-  //   const data = await response.json();
-  //   setReviews(data);
-  // }
 
   async function postReview(ev: any) {
     ev.preventDefault();
@@ -59,19 +52,18 @@ export default function page() {
       setMessage("Error submitting review");
     }
   }
+
   useEffect(() => {
     let stars = [];
-    for (let i = 0; i < halfStars; i++) {
-      const star: StarComponent = { id: i, filled: false };
-      stars.push(star);
+    for (let i = 0; i < totalStars; i++) {
+      stars.push({ id: i, filled: false, half: false });
     }
-    setStarComponents([...stars]);
-
-    // fetchReviews();
+    setStarComponents(stars);
   }, []);
+
   return (
     <div>
-      <h1>Create an review!</h1>
+      <h1>Create a review!</h1>
       <input
         type="text"
         className="text-black"
@@ -87,29 +79,47 @@ export default function page() {
         onChange={(ev) => setContent(ev.target.value)}
       />
       <div>{stars}</div>
-      <div className="flex cursor-pointer">
-        {starsComponents.map((halfStar) => (
-          <div
-            key={halfStar.id}
-            onClick={() => fillStars(halfStar.id)}
-            className={`w-10 h-10 cursor-pointer hover:brightness-125 ${
-              halfStar.id % 2 === 0 && halfStar.id !== 0 && "ml-5"
-            } ${halfStar.filled ? "bg-amber-300" : "bg-slate-400"}`}
-          ></div>
+      <div className="flex gap-2">
+        {starsComponents.map((star, i) => (
+          <div key={i} className="relative w-10 h-10 cursor-pointer">
+            <svg
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+              onClick={() => fillStars(star.id, false)}
+            >
+              <defs>
+                <linearGradient
+                  id={`half-fill-${i}`}
+                  x1="0"
+                  y1="0"
+                  x2="100%"
+                  y2="0"
+                >
+                  <stop offset="50%" stopColor="#ffc107" />
+                  <stop offset="50%" stopColor="#ccc" />
+                </linearGradient>
+              </defs>
+              <path
+                fill={
+                  star.filled
+                    ? "#ffc107"
+                    : star.half
+                    ? `url(#half-fill-${i})`
+                    : "#ccc"
+                }
+                d="M12 .587l3.668 7.568L24 9.267l-6 5.832 1.417 8.256L12 18.897l-7.417 4.458L6 15.099 0 9.267l8.332-1.112z"
+              />
+            </svg>
+            <div
+              className="absolute left-0 top-0 w-1/2 h-full cursor-pointer"
+              onClick={() => fillStars(star.id, true)}
+            ></div>
+          </div>
         ))}
       </div>
       <button onClick={(ev) => postReview(ev)}>Post review</button>
       <div>{message}</div>
-
-      <div>
-        {reviews.map((review) => (
-          <div>
-            <h3>{(review as any).name}</h3>
-            <span>{(review as any).content}</span>
-            <span>stars: {(review as any).stars}</span>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
