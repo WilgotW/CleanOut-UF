@@ -8,3 +8,18 @@
   -webkit-background-clip: text;
   color: transparent;
 }
+.higher-z-index {
+  z-index: 1050 !important;
+}
+.react-datepicker__input-container input {
+  width: 100%;
+  height: 3.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: initial;
+}

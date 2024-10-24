@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function page() {
   return (
     <div>
@@ -8,6 +10,7 @@ export default function page() {
       </div>
       <div className="w-full flex justify-center">
         <div className="w-full flex flex-col gap-5 overflow-hidden">
+          <Link href="/booking">Book</Link>
           <div className="bg-orange-50 text-black h-96 p-2 border border-orange-600">
             <h1>Simple</h1>
             <h3>Simple car wash...</h3>

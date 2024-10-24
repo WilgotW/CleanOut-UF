@@ -2,6 +2,7 @@ import * as React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Noto_Serif } from "@next/font/google";
 import ClientLayout from "./ClientLayout";
 
 const geistSans = localFont({
@@ -14,6 +15,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+// const notoSerif = Noto_Serif({
+//   weight: ["400", "700"],
+//   subsets: ["latin"],
+//   variable: "--font-noto-serif",
+// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
