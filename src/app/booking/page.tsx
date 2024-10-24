@@ -76,17 +76,21 @@ export default function BookingPage() {
               key={plan.title}
               onClick={() => selectPlan(plan.title)}
               className={`${
-                plan.selected && "bg-[#1976d2] text-white"
-              } h-30 w-full rounded-md shadow-md hover:shadow-xl transition-all p-2 md:p-3 cursor-pointer select-none`}
+                plan.selected && "bg-[#1976d2] text-white "
+              } h-30 w-full rounded-md shadow-md hover:shadow-xl transition-colors duration-300 p-2 md:p-3 cursor-pointer select-none`}
             >
-              <h2 className="font-noto-serif font-extrabold">{plan.title}</h2>
-              <span className="text-sm m-0 leading-none">{plan.desc}</span>
+              <h2 className="font-noto-serif font-extrabold select-none">
+                {plan.title}
+              </h2>
+              <span className="text-sm m-0 leading-none select-none">
+                {plan.desc}
+              </span>
             </div>
           ))}
         </div>
 
-        <div className="flex pt-5">
-          <div className="flex flex-col w-full">
+        <div className="flex pt-5 gap-2 pb-5">
+          <div className="flex flex-col w-full gap-2">
             <label>Datum</label>
             <DatePicker
               selected={selectedDate}
@@ -98,7 +102,7 @@ export default function BookingPage() {
               popperPlacement="bottom-end"
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <label>tid</label>
             <DatePicker
               selected={selectedTime}
