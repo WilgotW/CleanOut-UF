@@ -1,6 +1,5 @@
 import React from "react";
 
-// Accept stars as part of an object (props)
 export default function StarsRating({ stars }: { stars: number }) {
   return (
     <>
