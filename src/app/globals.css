@@ -10,6 +10,7 @@
 }
 .higher-z-index {
   z-index: 1050 !important;
+  /* transform: translateX(100px); */
 }
 .react-datepicker__input-container input {
   width: 100%;

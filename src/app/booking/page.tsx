@@ -3,7 +3,10 @@ import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+import { sv } from "date-fns/locale/sv"; // Import Swedish locale from date-fns
 
+registerLocale("sv", sv);
 interface Plan {
   title: string;
   desc: string;
@@ -11,6 +14,10 @@ interface Plan {
 }
 
 export default function BookingPage() {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [error, setError] = useState(false);
+  const [selectedTime, setSelectedTime] = useState<Date | null>(new Date());
   const [plans, setPlans] = useState<Plan[]>([
     {
       title: "Vanlig",
@@ -28,13 +35,10 @@ export default function BookingPage() {
       selected: false,
     },
   ]);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [error, setError] = useState(false);
 
   const phoneNumberPattern = /^7(0|3)\d\s?\d{3}\s?\d{3}$/;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handlePhoneNumber(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     if (phoneNumberPattern.test(value)) {
       setError(false);
@@ -42,7 +46,7 @@ export default function BookingPage() {
       setError(true);
     }
     setPhoneNumber(value);
-  };
+  }
 
   function selectPlan(title: string) {
     let newList: Plan[] = [...plans];
@@ -53,7 +57,7 @@ export default function BookingPage() {
   }
 
   return (
-    <div className="w-full flex justify-center p-10 ">
+    <div className="w-full flex justify-center p-5 ">
       <div className="max-w-[800px]">
         <div className="mb-6">
           <h1 className="text-2xl font-noto-serif font-extrabold">
@@ -81,20 +85,31 @@ export default function BookingPage() {
           ))}
         </div>
 
-        <div className="flex h-32 items-center">
-          <div className="relative pt-5 flex flex-col w-full gap-2">
-            <label className="">Välj ett datum och tid</label>
+        <div className="flex pt-5">
+          <div className="flex flex-col w-full">
+            <label>Datum</label>
             <DatePicker
               selected={selectedDate}
               onChange={(date: Date | null) => setSelectedDate(date)}
+              dateFormat="dd-MM-yyyy"
+              locale="sv"
+              className="w-full border rounded-md"
+              popperClassName="higher-z-index"
+              popperPlacement="bottom-end"
+            />
+          </div>
+          <div>
+            <label>tid</label>
+            <DatePicker
+              selected={selectedTime}
+              onChange={(time: Date | null) => setSelectedTime(time)}
               showTimeSelect
-              timeFormat="HH:mm"
+              showTimeSelectOnly
               timeIntervals={15}
-              dateFormat="dd-MM-yyyy HH:mm"
               locale="sv"
               timeCaption="Tid"
-              className="w-full p-2 h-[3.5rem] border rounded-md"
-              popperClassName="higher-z-index"
+              dateFormat="HH:mm"
+              className="w-full border rounded-md"
             />
           </div>
         </div>
@@ -118,7 +133,7 @@ export default function BookingPage() {
                 variant="outlined"
                 fullWidth
                 value={phoneNumber}
-                onChange={handleChange}
+                onChange={handlePhoneNumber}
                 placeholder="70X XXX XXX or 73X XXX XXX"
                 error={error}
                 helperText={error ? "Ogiltigt svenskt telefonnummer" : ""}
