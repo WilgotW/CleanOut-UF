@@ -5,7 +5,7 @@ export default function StarsRating({ stars }: { stars: number }) {
   return (
     <>
       {Array.from({ length: 5 }).map((_, i) => (
-        <div key={i} className="relative w-10 h-5 cursor-pointer">
+        <div key={i} className="relative w-10 h-5">
           <svg
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ export default function StarsRating({ stars }: { stars: number }) {
               d="M12 .587l3.668 7.568L24 9.267l-6 5.832 1.417 8.256L12 18.897l-7.417 4.458L6 15.099 0 9.267l8.332-1.112z"
             />
           </svg>
-          <div className="absolute left-0 top-0 w-1/2 h-full cursor-pointer"></div>
+          <div className="absolute left-0 top-0 w-1/2 h-full"></div>
         </div>
       ))}
     </>
