@@ -1,19 +1,23 @@
-// pages/api/sendEmail.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
+import { getDate, getMonth, getYear } from "date-fns";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { name, email, phoneNumber, plan, date, time } = req.body;
+  const { name, email, phoneNumber, selectedPlan, selectedDate, selectedTime } =
+    req.body;
+
+  const date = new Date(selectedDate);
+  const time = new Date(selectedTime);
 
   if (req.method === "POST") {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
         user: process.env.ADMIN_EMAIL_USER,
-        pass: process.env.ADMIN_EMAIL_PASSWORD,
+        pass: process.env.APP_PASSWORD,
       },
     });
 
@@ -22,8 +26,17 @@ export default async function handler(
         from: email,
         to: process.env.ADMIN_EMAIL,
         subject: `Ny bokning från ${name}!`,
-        text: `${name} har bokat [${plan}]. Datum: [${date}], Tid: [${time}]. Kontakt information: telefon: ${phoneNumber}, mail: ${email}`,
-        html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p>`,
+        text: `${name} har bokat [${selectedPlan}].`,
+        html: `<p><strong>${name}</strong> har bokat en biltvätt av typ: <strong>${selectedPlan}</strong> 
+          <p>Datum: ${getDate(selectedDate)}-${getMonth(date) + 1}-${getYear(
+          selectedDate
+        )}</p>
+          <p>Tid: ${String(time.getHours()).padStart(2, "0")}:${String(
+          time.getMinutes()
+        ).padStart(2, "0")}</p></p>
+          <p><strong>Kontaktinformation:</strong></p>
+          <p>mail: ${email}</p>
+          <p>telefonnummer: ${phoneNumber}</p>`,
       });
 
       console.log("Message sent: %s", info.messageId);

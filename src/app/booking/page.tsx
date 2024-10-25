@@ -1,6 +1,6 @@
 "use client";
 import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
@@ -55,31 +55,39 @@ export default function BookingPage() {
 
   function selectPlan(title: string) {
     let newList: Plan[] = [...plans];
-    newList.forEach((plan) =>
-      plan.title === title ? (plan.selected = true) : (plan.selected = false)
-    );
+    newList.forEach((plan) => {
+      if (plan.title === title) {
+        setSelectedPlan(plan.title);
+        plan.selected = true;
+      } else {
+        plan.selected = false;
+      }
+    });
     setPlans(newList);
   }
 
+  useEffect(() => {
+    console.log(selectedPlan);
+  }, [selectedPlan]);
   async function sendBookingMail(
     ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     ev.preventDefault();
-    const formData = {
-      name: name,
-      email: email,
-      phoneNumber: phoneNumber,
-      plan: selectedPlan,
-      date: selectedDate,
-      time: selectedTime,
-    };
+
     try {
-      const response = await fetch("/api/sendEmail", {
+      const response = await fetch("/api/mail/sendEmail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name,
+          email,
+          phoneNumber,
+          selectedPlan,
+          selectedDate,
+          selectedTime,
+        }),
       });
       const result = await response.json();
       if (result.success) {
@@ -102,6 +110,9 @@ export default function BookingPage() {
     setPhoneNumber("");
   }
 
+  useEffect(() => {
+    console.log(selectedDate);
+  }, [selectedDate]);
   return (
     <div className="w-full flex justify-center p-5 ">
       <div className="max-w-[800px]">
@@ -169,6 +180,8 @@ export default function BookingPage() {
             <div className="flex flex-col gap-2">
               <label>Namn</label>
               <TextField
+                value={name}
+                onChange={(ev) => setName(ev.target.value)}
                 id="username"
                 label="Ditt namn"
                 variant="outlined"
@@ -192,6 +205,8 @@ export default function BookingPage() {
             <div className="flex flex-col gap-2">
               <label>Mail adress</label>
               <TextField
+                value={email}
+                onChange={(ev) => setEmail(ev.target.value)}
                 id="username"
                 label="Mail"
                 variant="outlined"
