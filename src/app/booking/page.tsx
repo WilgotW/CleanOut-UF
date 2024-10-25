@@ -41,7 +41,7 @@ export default function BookingPage() {
     },
   ]);
 
-  const phoneNumberPattern = /^07\d{1}[-\s]?\d{3}[-\s]?\d{4}$/;
+  const phoneNumberPattern = /^(07[03]|\+467[03])\d{1}[-\s]?\d{3}[-\s]?\d{3}$/;
 
   function handlePhoneNumber(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -66,9 +66,6 @@ export default function BookingPage() {
     setPlans(newList);
   }
 
-  useEffect(() => {
-    console.log(selectedPlan);
-  }, [selectedPlan]);
   async function sendBookingMail(
     ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
