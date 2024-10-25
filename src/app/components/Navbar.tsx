@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 interface MenuItem {
   name: string;
@@ -11,15 +12,18 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const menuItems: MenuItem[] = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Pricing", href: "/price-plans" },
-    { name: "Reviews", href: "/review-form" },
+    { name: "Hem", href: "/" },
+    { name: "Priser", href: "/price-plans" },
+    { name: "Recensioner", href: "/review-form" },
+    { name: "Om oss", href: "/about" },
   ];
 
   return (
-    <>
-      <nav className="hidden sm:flex fixed top-0 w-full bg-white shadow-md z-10">
+    <div className="relative h-fit flex items-center">
+      <div className="absolute top-0 w-20 h-14 z-10 sm:right-0 flex items-center justify-center">
+        Logo
+      </div>
+      <nav className="hidden sm:flex fixed top-0 w-full  shadow-md z-10">
         <ul className="flex w-fit gap-10 justify-around p-4">
           {menuItems.map((item) => (
             <li key={item.name}>
@@ -56,10 +60,10 @@ export default function Navbar() {
           }`}
         >
           <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Menu</h2>
+            <h2 className="text-2xl font-bold mb-4">Meny</h2>
             <ul>
               {menuItems.map((item) => (
-                <li key={item.name} className="mb-2">
+                <li key={item.name} className="mb-4">
                   <Link
                     href={item.href}
                     className="text-gray-500 hover:text-green-500 transition duration-300"
@@ -73,6 +77,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-    </>
+    </div>
   );
 }
