@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import { sv } from "date-fns/locale/sv"; // Import Swedish locale from date-fns
+import { setDate } from "date-fns";
 
 registerLocale("sv", sv);
 interface Plan {
@@ -15,9 +16,13 @@ interface Plan {
 
 export default function BookingPage() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [error, setError] = useState(false);
   const [selectedTime, setSelectedTime] = useState<Date | null>(new Date());
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [error, setError] = useState(false);
+  const [bookingStatus, setBookingStatus] = useState<string>("");
   const [plans, setPlans] = useState<Plan[]>([
     {
       title: "Vanlig",
@@ -36,7 +41,7 @@ export default function BookingPage() {
     },
   ]);
 
-  const phoneNumberPattern = /^7(0|3)\d\s?\d{3}\s?\d{3}$/;
+  const phoneNumberPattern = /^07\d{1}[-\s]?\d{3}[-\s]?\d{4}$/;
 
   function handlePhoneNumber(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -54,6 +59,47 @@ export default function BookingPage() {
       plan.title === title ? (plan.selected = true) : (plan.selected = false)
     );
     setPlans(newList);
+  }
+
+  async function sendBookingMail(
+    ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    ev.preventDefault();
+    const formData = {
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber,
+      plan: selectedPlan,
+      date: selectedDate,
+      time: selectedTime,
+    };
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json();
+      if (result.success) {
+        setBookingStatus("Bokning skickad!");
+        resetStates();
+      } else {
+        setBookingStatus("Bokning misslyckades");
+      }
+    } catch (err) {
+      console.error(err);
+      setBookingStatus("An error occurred when booking");
+    }
+  }
+
+  function resetStates() {
+    setName("");
+    setEmail("");
+    selectPlan("");
+    setSelectedPlan("");
+    setPhoneNumber("");
   }
 
   return (
@@ -138,13 +184,13 @@ export default function BookingPage() {
                 fullWidth
                 value={phoneNumber}
                 onChange={handlePhoneNumber}
-                placeholder="70X XXX XXX or 73X XXX XXX"
+                placeholder="070 XXX XXXX eller 073-XXX-XXXX"
                 error={error}
-                helperText={error ? "Ogiltigt svenskt telefonnummer" : ""}
+                helperText={error ? "Ogiltigt telefonnummer" : ""}
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label>Mail adress (frivilligt)</label>
+              <label>Mail adress</label>
               <TextField
                 id="username"
                 label="Mail"
@@ -153,7 +199,11 @@ export default function BookingPage() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Button className="w-full" variant="contained">
+              <Button
+                onClick={(ev) => sendBookingMail(ev)}
+                className="w-full"
+                variant="contained"
+              >
                 Skicka bokning
               </Button>
             </div>
