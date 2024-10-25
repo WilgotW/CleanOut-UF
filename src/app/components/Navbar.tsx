@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useState } from "react";
 
 interface MenuItem {
   name: string;
@@ -7,7 +8,6 @@ interface MenuItem {
 }
 
 export default function Navbar() {
-  const [isLargeScreen, setIsLargeScreen] = useState<boolean>(true);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const menuItems: MenuItem[] = [
@@ -17,75 +17,62 @@ export default function Navbar() {
     { name: "Reviews", href: "/review-form" },
   ];
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 768);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   return (
     <>
-      {isLargeScreen ? (
-        <nav className="fixed top-0 w-full bg-white shadow-md z-10">
-          <ul className="flex w-fit gap-10 justify-around p-4">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <a href={item.href}>{item.name}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      ) : (
-        <nav>
-          <div
-            className="fixed top-4 right-4 z-50 w-10 h-10 flex flex-col justify-center items-center focus:outline-none cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <span
-              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-                isOpen ? "rotate-45 translate-y-1" : "-translate-y-1"
-              }`}
-            ></span>
-            <span
-              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
-                isOpen ? "opacity-0" : "opacity-100"
-              }`}
-            ></span>
-            <span
-              className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
-                isOpen ? "-rotate-45 -translate-y-1" : "translate-y-1"
-              }`}
-            ></span>
-          </div>
-          <div
-            className={`fixed top-0 z-10 right-0 w-64 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
-              isOpen ? "translate-x-0" : "translate-x-full"
+      <nav className="hidden sm:flex fixed top-0 w-full bg-white shadow-md z-10">
+        <ul className="flex w-fit gap-10 justify-around p-4">
+          {menuItems.map((item) => (
+            <li key={item.name}>
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <nav className="sm:hidden">
+        <div
+          className="fixed top-4 right-4 z-50 w-10 h-10 flex flex-col justify-center items-center focus:outline-none cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span
+            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+              isOpen ? "rotate-45 translate-y-1" : "-translate-y-1"
             }`}
-          >
-            <div className="p-4">
-              <h2 className="text-2xl font-bold mb-4">Menu</h2>
-              <ul>
-                {menuItems.map((item) => (
-                  <li key={item.name} className="mb-2">
-                    <a
-                      href={item.href}
-                      className="text-gray-500 hover:text-green-500 transition duration-300"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          ></span>
+          <span
+            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm my-0.5 ${
+              isOpen ? "opacity-0" : "opacity-100"
+            }`}
+          ></span>
+          <span
+            className={`bg-black block transition-all duration-300 ease-out h-0.5 w-6 rounded-sm ${
+              isOpen ? "-rotate-45 -translate-y-1" : "translate-y-1"
+            }`}
+          ></span>
+        </div>
+        <div
+          className={`fixed top-0 z-10 right-0 w-64 h-full bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="p-4">
+            <h2 className="text-2xl font-bold mb-4">Menu</h2>
+            <ul>
+              {menuItems.map((item) => (
+                <li key={item.name} className="mb-2">
+                  <Link
+                    href={item.href}
+                    className="text-gray-500 hover:text-green-500 transition duration-300"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </nav>
-      )}
+        </div>
+      </nav>
     </>
   );
 }
