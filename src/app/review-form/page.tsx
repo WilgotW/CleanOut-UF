@@ -66,10 +66,10 @@ export default function Page() {
   return (
     <div className="flex justify-center p-5">
       <div className="flex flex-col w-96 gap-8">
-        <h1 className="text-xl">Write a review!</h1>
+        <h1 className="text-xl">Skriv en recensioner!</h1>
         <TextField
           id="standard-basic"
-          label="Your name"
+          label="Ditt namn"
           variant="standard"
           value={name}
           onChange={(ev) => setName(ev.target.value)}
@@ -77,7 +77,7 @@ export default function Page() {
         <TextField
           value={content}
           onChange={(ev) => setContent(ev.target.value)}
-          label="Write review"
+          label="skriv recension"
           variant="outlined"
           multiline
           rows={8}

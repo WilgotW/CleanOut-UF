@@ -19,7 +19,7 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="relative h-fit flex items-center">
+    <div className="relative h-fit flex items-center z-20">
       <div className="absolute top-0 w-20 h-14 z-10 sm:right-0 flex items-center justify-center">
         Logo
       </div>
