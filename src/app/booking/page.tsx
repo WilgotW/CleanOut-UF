@@ -6,6 +6,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import { sv } from "date-fns/locale/sv"; // Import Swedish locale from date-fns
 import { setDate } from "date-fns";
+import SendIcon from "@mui/icons-material/Send";
+import LoadingButton from "@mui/lab/LoadingButton";
+import Popup from "../components/Popup";
 
 registerLocale("sv", sv);
 interface Plan {
@@ -23,6 +26,9 @@ export default function BookingPage() {
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState(false);
   const [bookingStatus, setBookingStatus] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [allFieldsFilled, setAllFieldsFilled] = useState<boolean>(false);
   const [plans, setPlans] = useState<Plan[]>([
     {
       title: "Vanlig",
@@ -70,7 +76,7 @@ export default function BookingPage() {
     ev: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     ev.preventDefault();
-
+    setLoading(true);
     try {
       const response = await fetch("/api/mail/sendEmail", {
         method: "POST",
@@ -97,6 +103,8 @@ export default function BookingPage() {
       console.error(err);
       setBookingStatus("An error occurred when booking");
     }
+    setLoading(false);
+    setShowPopup(true);
   }
 
   function resetStates() {
@@ -108,10 +116,27 @@ export default function BookingPage() {
   }
 
   useEffect(() => {
-    console.log(selectedDate);
-  }, [selectedDate]);
+    const states = [
+      selectedPlan,
+      selectedDate,
+      selectedTime,
+      name,
+      phoneNumber,
+      email,
+    ];
+    const allTrue = states.every((item) => item);
+    setAllFieldsFilled(allTrue);
+  }, [selectedPlan, selectedDate, selectedTime, name, phoneNumber, email]);
+
   return (
-    <div className="w-full flex justify-center p-5 ">
+    <div className="w-full h-full flex justify-center p-5">
+      {showPopup && (
+        <Popup
+          title="Bokning skickad!"
+          message="Du har bokat en biltvätt, ..."
+          hidePopup={() => setShowPopup(false)}
+        />
+      )}
       <div className="max-w-[800px]">
         <div className="mb-6">
           <h1 className="text-2xl font-noto-serif font-extrabold">
@@ -211,13 +236,16 @@ export default function BookingPage() {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <Button
+              <LoadingButton
                 onClick={(ev) => sendBookingMail(ev)}
                 className="w-full"
                 variant="contained"
+                endIcon={<SendIcon />}
+                loading={loading}
+                disabled={!allFieldsFilled}
               >
                 Skicka bokning
-              </Button>
+              </LoadingButton>
             </div>
           </div>
         </div>

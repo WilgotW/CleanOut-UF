@@ -2,7 +2,7 @@ import * as React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Noto_Serif } from "@next/font/google";
+import { Noto_Serif } from "next/font/google";
 import ClientLayout from "./ClientLayout";
 
 const geistSans = localFont({
