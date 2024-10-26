@@ -145,7 +145,7 @@ export default function HomeContent({ reviews }: IProps) {
                 </Link>
               </div>
             </div>
-            <div className="p-4 text-center overflow-y-scroll">
+            <div className="p-4 text-center overflow-y-scroll animate-fade-in">
               <div className="flex flex-col gap-5">
                 <div className="lg:hidden">
                   <h1 className="text-lg text-left">Recensioner</h1>
