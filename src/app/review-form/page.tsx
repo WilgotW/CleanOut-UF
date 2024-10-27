@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 interface StarComponent {
   id: number;
@@ -18,6 +19,7 @@ export default function Page() {
   const totalStars = 5;
   const [starsComponents, setStarComponents] = useState<StarComponent[]>([]);
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   function fillStars(id: number, isHalf: boolean) {
     let updatedStars = starsComponents.map((star, index) => {
@@ -35,6 +37,7 @@ export default function Page() {
 
   async function postReview(ev: any) {
     ev.preventDefault();
+    setLoading(true);
     try {
       const response = await fetch("/api/reviews/create", {
         method: "POST",
@@ -53,6 +56,7 @@ export default function Page() {
     } catch (err) {
       setMessage("Error submitting review");
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -123,13 +127,15 @@ export default function Page() {
             </div>
           ))}
         </div>
-        <Button
+        <LoadingButton
           onClick={(ev) => postReview(ev)}
           className="w-full"
           variant="contained"
+          loading={loading}
+          disabled={!name || !content || !stars}
         >
           Post review
-        </Button>
+        </LoadingButton>
 
         <div>{message}</div>
       </div>

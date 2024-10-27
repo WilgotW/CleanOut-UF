@@ -13,6 +13,7 @@ import Popup from "../components/Popup";
 registerLocale("sv", sv);
 interface Plan {
   title: string;
+  price: number;
   desc: string;
   selected: boolean;
 }
@@ -31,18 +32,21 @@ export default function BookingPage() {
   const [allFieldsFilled, setAllFieldsFilled] = useState<boolean>(false);
   const [plans, setPlans] = useState<Plan[]>([
     {
-      title: "Vanlig",
-      desc: "Lorem ipsum",
+      title: "Utsidatvätt",
+      price: 1000,
+      desc: "Ge bilens utsida en snabb uppfräschning.",
       selected: false,
     },
     {
-      title: "Biltvätt 2",
-      desc: "Lorem ipsum",
+      title: "Inredningstvätt",
+      price: 1500,
+      desc: "Fräscha upp insidan av din bil med en grundlig inredningstvätt",
       selected: false,
     },
     {
-      title: "Biltvätt 3",
-      desc: "Lorem ipsum",
+      title: "Rekond",
+      price: 2500,
+      desc: "fullständig behandling både in- och utvändigt",
       selected: false,
     },
   ]);
@@ -162,9 +166,9 @@ export default function BookingPage() {
               } h-30 w-full rounded-md shadow-md hover:shadow-xl transition-colors duration-300 p-2 md:p-3 cursor-pointer select-none`}
             >
               <h2 className="font-noto-serif font-extrabold select-none">
-                {plan.title}
+                {plan.title} ({plan.price}kr)
               </h2>
-              <span className="text-sm m-0 leading-none select-none">
+              <span className="text-xs m-0 leading-none select-none">
                 {plan.desc}
               </span>
             </div>

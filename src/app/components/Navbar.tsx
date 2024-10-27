@@ -20,11 +20,22 @@ export default function Navbar() {
 
   return (
     <div className="relative h-fit flex items-center z-20">
-      <div className="absolute top-0 w-20 h-14 z-10 sm:right-0 flex items-center justify-center ">
-        Logo
+      <div className="absolute top-0 w-20 h-14 z-20 sm:right-10 flex items-center justify-center ">
+        <Link
+          className="cursor-pointer flex items-center w-16 h-16 pt-3 sm:mr-16 sm:mb-3"
+          href="/"
+        >
+          <Image
+            src="/images/logo.png"
+            alt="Description"
+            width={100}
+            height={100}
+          />
+          Cleanout
+        </Link>
       </div>
       <nav className="hidden sm:flex fixed top-0 w-full  shadow-md z-10 bg-white">
-        <ul className="flex w-fit gap-10 justify-around p-4">
+        <ul className="flex w-fit gap-10 justify-around p-4 cursor-pointer">
           {menuItems.map((item) => (
             <li key={item.name}>
               <Link href={item.href}>{item.name}</Link>
@@ -63,7 +74,7 @@ export default function Navbar() {
             <h2 className="text-2xl font-bold mb-4">Meny</h2>
             <ul>
               {menuItems.map((item) => (
-                <li key={item.name} className="mb-4">
+                <li key={item.name} className="mb-4 cursor-pointer">
                   <Link
                     href={item.href}
                     className="text-gray-500 hover:text-green-500 transition duration-300"
