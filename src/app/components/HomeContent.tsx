@@ -66,7 +66,7 @@ export default function HomeContent({ reviews }: IProps) {
           </div>
           <div className="pl-12 pr-2 animate-fade-in hidden md:block lg:pl-52 lg:pt-16">
             <div className="flex w-full justify-between items-center">
-              <h1 className="text-4xl xl:text-6xl text-white">Cleanout</h1>
+              <h1 className="text-4xl xl:text-6xl text-white">CleanOut</h1>
             </div>
             <div className="flex w-32 gap-1">
               <StarsRating stars={4.5} />
@@ -81,7 +81,7 @@ export default function HomeContent({ reviews }: IProps) {
         <div className="flex flex-col">
           <div className="pl-4 pr-4 md:pl-8 md:pr-8 animate-fade-in md:hidden">
             <div className="flex w-full justify-between items-center">
-              <h1 className="text-2xl text-gray-700">Cleanout</h1>
+              <h1 className="text-2xl text-gray-700">CleanOut</h1>
               <div>
                 <span className="font-bold text-green-600">Öppet: </span>
                 <span>12:00 - 20:00</span>

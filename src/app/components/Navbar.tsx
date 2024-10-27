@@ -20,7 +20,7 @@ export default function Navbar() {
 
   return (
     <div className="relative h-fit flex items-center z-20">
-      <div className="absolute top-0 w-20 h-14 z-20 sm:right-10 flex items-center justify-center ">
+      <div className="absolute top-0 w-20 h-14 z-10 sm:right-10 flex items-center justify-center ">
         <Link
           className="cursor-pointer flex items-center w-16 h-16 pt-3 sm:mr-16 sm:mb-3"
           href="/"
