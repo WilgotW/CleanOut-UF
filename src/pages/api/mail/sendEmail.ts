@@ -6,8 +6,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { name, email, phoneNumber, selectedPlan, selectedDate, selectedTime } =
-    req.body;
+  const {
+    name,
+    email,
+    phoneNumber,
+    selectedPlan,
+    selectedDate,
+    selectedTime,
+    selectedCarType,
+    joinedExtras,
+    totalPrice,
+  } = req.body;
 
   const date = new Date(selectedDate);
   const time = new Date(selectedTime);
@@ -34,6 +43,9 @@ export default async function handler(
           <p>Tid: ${String(time.getHours()).padStart(2, "0")}:${String(
           time.getMinutes()
         ).padStart(2, "0")}</p></p>
+          <p>Bil typ: ${selectedCarType} </p> 
+          <p>extras: ${joinedExtras} </p>
+          <p>totalt pris: <strong>${totalPrice}</strong>kr</p>
           <p><strong>Kontaktinformation:</strong></p>
           <p>mail: ${email}</p>
           <p>telefonnummer: ${phoneNumber}</p>`,
