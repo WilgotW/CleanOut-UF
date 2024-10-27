@@ -44,6 +44,7 @@ export default function Page() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, content, stars }),
       });
+      const data = await response.json();
 
       if (response.ok) {
         setMessage("Review submitted successfully!");
@@ -51,7 +52,7 @@ export default function Page() {
         setContent("");
         setStars(0);
       } else {
-        setMessage("Failed to submit review");
+        setMessage(data.message);
       }
     } catch (err) {
       setMessage("Error submitting review");

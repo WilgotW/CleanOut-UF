@@ -19,7 +19,7 @@ export default async function handler(
       if (existingReview) {
         return res
           .status(403)
-          .json({ message: "You have already submitted a review." });
+          .json({ message: "Du har redan skrivit en recension" });
       }
 
       const newReview = await createReview(name, content, stars, ipAddress);
