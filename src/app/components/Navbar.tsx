@@ -13,17 +13,17 @@ export default function Navbar() {
 
   const menuItems: MenuItem[] = [
     { name: "Hem", href: "/" },
-    { name: "Priser", href: "/price-plans" },
+    { name: "Boka", href: "/booking" },
     { name: "Recensioner", href: "/review-form" },
     { name: "Om oss", href: "/about" },
   ];
 
   return (
     <div className="relative h-fit flex items-center z-20">
-      <div className="absolute top-0 w-20 h-14 z-10 sm:right-0 flex items-center justify-center">
+      <div className="absolute top-0 w-20 h-14 z-10 sm:right-0 flex items-center justify-center ">
         Logo
       </div>
-      <nav className="hidden sm:flex fixed top-0 w-full  shadow-md z-10">
+      <nav className="hidden sm:flex fixed top-0 w-full  shadow-md z-10 bg-white">
         <ul className="flex w-fit gap-10 justify-around p-4">
           {menuItems.map((item) => (
             <li key={item.name}>

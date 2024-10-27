@@ -155,7 +155,7 @@ export default function HomeContent({ reviews }: IProps) {
                   {reviews.map((review, i) => (
                     <div
                       key={i}
-                      className="w-full flex flex-col rounded-md shadow-lg p-5 max-w-96 max-h-64 overflow-y-scroll"
+                      className="w-full flex flex-col rounded-md shadow-lg p-5 md:max-w-96 max-h-64 overflow-y-scroll"
                     >
                       <h1 className="text-left">
                         <b>{review.name}</b>
