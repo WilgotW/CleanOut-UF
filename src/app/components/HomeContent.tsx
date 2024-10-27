@@ -181,6 +181,9 @@ export default function HomeContent({ reviews }: IProps) {
             </div>
           </div>
         </div>
+        <div className="w-full h-44 bg-[#161A1D] z-20 mt-32 text-white flex items-end p-6">
+          Kontakta oss: 070...
+        </div>
       </div>
     </div>
   );
