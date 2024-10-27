@@ -19,4 +19,5 @@ model Review {
   content String
   stars Float
   createdAt DateTime @default(now())
+  ipAddress String?   
 }

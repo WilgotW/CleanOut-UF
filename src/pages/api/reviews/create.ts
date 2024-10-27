@@ -1,4 +1,4 @@
-import { createReview } from "@/services/ReviewService";
+import { createReview, findReviewByIp } from "@/services/ReviewService";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -7,15 +7,26 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { name, content, stars } = req.body;
+    const ipAddress = (req.headers["x-forwarded-for"] ||
+      req.socket.remoteAddress) as string;
 
     if (!name || !content) {
-      return res.status(400).json({ message: "Name and content is required" });
+      return res.status(400).json({ message: "Name and content are required" });
     }
+
     try {
-      const newReview = await createReview(name, content, stars);
+      const existingReview = await findReviewByIp(ipAddress);
+      if (existingReview) {
+        return res
+          .status(403)
+          .json({ message: "You have already submitted a review." });
+      }
+
+      const newReview = await createReview(name, content, stars, ipAddress);
       res.status(201).json(newReview);
     } catch (err) {
-      res.status(500).json({ message: "Servor error" });
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
     }
   } else {
     res.status(405).json({ message: `Method ${req.method} not allowed` });

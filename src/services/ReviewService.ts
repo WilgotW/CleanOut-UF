@@ -13,16 +13,24 @@ export async function getLatest(amount: number) {
 export async function createReview(
   name: string,
   content: string,
-  stars: number
+  stars: number,
+  ipAddress: string
 ) {
   const newReview = await prisma.review.create({
     data: {
       name,
       content,
       stars,
+      ipAddress,
     },
   });
   return newReview;
+}
+
+export async function findReviewByIp(ipAddress: string) {
+  return prisma.review.findFirst({
+    where: { ipAddress },
+  });
 }
 
 export async function deleteReview(id: number) {
