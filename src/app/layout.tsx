@@ -1,3 +1,4 @@
+import Head from "next/head";
 import * as React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -33,6 +34,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
