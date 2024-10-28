@@ -16,11 +16,11 @@ export default async function handler(
 
     try {
       const existingReview = await findReviewByIp(ipAddress);
-      // if (existingReview) {
-      //   return res
-      //     .status(403)
-      //     .json({ message: "Du har redan skrivit en recension" });
-      // }
+      if (existingReview) {
+        return res
+          .status(403)
+          .json({ message: "Du har redan skrivit en recension" });
+      }
 
       const newReview = await createReview(
         name,

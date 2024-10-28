@@ -96,9 +96,9 @@
 }
 
 .fade-in {
-  animation: fadeIn 1s ease forwards;
+  animation: fadeIn 1.5s ease forwards;
 }
 
 .fade-out {
-  animation: fadeOut 1s ease forwards;
+  animation: fadeOut 1.5s ease forwards;
 }

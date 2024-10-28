@@ -20,6 +20,7 @@ interface IProps {
     title: string;
     stars: number;
     content: string;
+    createdAt: Date;
   }[];
 }
 
@@ -62,8 +63,8 @@ export default function HomeContent({ reviews }: IProps) {
       setTimeout(() => {
         setCurrentReviewIndex((prevIndex) => (prevIndex + 1) % reviews.length);
         setAnimationClass("fade-in");
-      }, 1000);
-    }, 10000);
+      }, 1500);
+    }, 12000);
     return () => clearInterval(intervalId);
   }, [reviews.length]);
 
@@ -199,7 +200,7 @@ export default function HomeContent({ reviews }: IProps) {
                     ) : (
                       <div
                         key={i}
-                        className="w-full flex flex-col rounded-md shadow-lg p-5 max-h-64 2xl:w-96 overflow-y-scroll"
+                        className="relative w-full flex flex-col rounded-md shadow-lg p-5 max-h-64 2xl:w-96 overflow-y-scroll"
                       >
                         <h1 className="text-left lg:text-xl">
                           <b>{review.name}</b>
@@ -217,22 +218,27 @@ export default function HomeContent({ reviews }: IProps) {
                 ))}
               </div>
 
-              <div className="hidden xl:flex h-full pt-5 pb-5 gap-5 pl-10 pr-12">
+              <div className=" hidden xl:flex h-full pt-5 pb-5 gap-5 pl-10 pr-12">
                 <div
-                  className={`${animationClass} w-[500px] 2xl:w-[800px] h-[550px] text-wrap flex flex-col rounded-md shadow-lg p-12 overflow-y-auto`}
+                  className={`${animationClass} relative w-[500px] 2xl:w-[800px] h-[550px] text-wrap flex flex-col rounded-md shadow-lg p-12 overflow-y-auto`}
                 >
                   <h1 className="text-left lg:text-xl">
                     <b>{currentReview.name}</b>
                   </h1>
-                  <div className="flex w-28 mt-2">
+                  <div className="flex w-28 mt-3">
                     <StarsRating stars={currentReview.stars} />
                   </div>
-                  <h1 className="text-left lg:text-xl mt-1">
+                  <h1 className="text-left lg:text-xl mt-1 pb-4">
                     {currentReview.title}
                   </h1>
                   <hr />
-                  <span className="w-full break-words text-left text-lg mt-2">
+                  <span className="w-full break-words text-left text-lg mt-2 p-5">
                     {currentReview.content}
+                  </span>
+                  <span className="absolute left-10 bottom-10 z-10 text-gray-400">
+                    {currentReview.createdAt.getDay()}-
+                    {currentReview.createdAt.getMonth() + 1}-
+                    {currentReview.createdAt.getFullYear()}
                   </span>
                 </div>
               </div>
