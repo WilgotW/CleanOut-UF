@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { name, content, stars } = req.body;
+    const { name, title, content, stars } = req.body;
     const ipAddress = (req.headers["x-forwarded-for"] ||
       req.socket.remoteAddress) as string;
 
@@ -16,13 +16,19 @@ export default async function handler(
 
     try {
       const existingReview = await findReviewByIp(ipAddress);
-      if (existingReview) {
-        return res
-          .status(403)
-          .json({ message: "Du har redan skrivit en recension" });
-      }
+      // if (existingReview) {
+      //   return res
+      //     .status(403)
+      //     .json({ message: "Du har redan skrivit en recension" });
+      // }
 
-      const newReview = await createReview(name, content, stars, ipAddress);
+      const newReview = await createReview(
+        name,
+        title,
+        content,
+        stars,
+        ipAddress
+      );
       res.status(201).json(newReview);
     } catch (err) {
       console.error(err);

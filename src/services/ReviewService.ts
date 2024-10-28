@@ -12,6 +12,7 @@ export async function getLatest(amount: number) {
 
 export async function createReview(
   name: string,
+  title: string,
   content: string,
   stars: number,
   ipAddress: string
@@ -19,6 +20,7 @@ export async function createReview(
   const newReview = await prisma.review.create({
     data: {
       name,
+      title,
       content,
       stars,
       ipAddress,

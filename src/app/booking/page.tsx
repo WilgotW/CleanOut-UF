@@ -233,7 +233,7 @@ export default function BookingPage() {
   return (
     <div
       className={`
-      } w-full h-full flex justify-center p-5`}
+ w-full h-full flex justify-center p-5`}
     >
       {showPopup && (
         <Popup
@@ -260,7 +260,7 @@ export default function BookingPage() {
               key={plan.title}
               onClick={() => selectPlan(plan.title)}
               className={`${
-                plan.selected && "bg-[#1976d2] text-white "
+                plan.selected && "bg-[#E36A18] text-white "
               } h-30 w-full rounded-md shadow-md hover:shadow-xl transition-colors duration-300 p-2 md:p-3 cursor-pointer select-none`}
             >
               <h2 className="font-noto-serif font-extrabold select-none">
@@ -282,6 +282,7 @@ export default function BookingPage() {
                   {carTypes.map((car) => (
                     <label className="flex gap-2 items-center">
                       <input
+                        className="accent-[#E36A18]"
                         type="checkbox"
                         checked={selectedCarType === car.name}
                         onChange={() => selectCar(car.name)}
@@ -295,6 +296,7 @@ export default function BookingPage() {
                     {extraOptions.map((extra) => (
                       <label className="flex gap-2 items-center">
                         <input
+                          className="accent-[#E36A18]"
                           type="checkbox"
                           checked={extra.selected}
                           onChange={() => extraSelect(extra.name)}

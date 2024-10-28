@@ -13,6 +13,7 @@ interface StarComponent {
 
 export default function Page() {
   const [name, setName] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [stars, setStars] = useState<number>(0);
 
@@ -42,7 +43,7 @@ export default function Page() {
       const response = await fetch("/api/reviews/create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, content, stars }),
+        body: JSON.stringify({ name, title, content, stars }),
       });
       const data = await response.json();
 
@@ -78,6 +79,14 @@ export default function Page() {
           variant="standard"
           value={name}
           onChange={(ev) => setName(ev.target.value)}
+        />
+        <TextField
+          id="standard-basic"
+          label="Titel"
+          variant="outlined"
+          fullWidth
+          value={title}
+          onChange={(ev) => setTitle(ev.target.value)}
         />
         <TextField
           value={content}
