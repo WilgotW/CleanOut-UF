@@ -17,7 +17,7 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Cleanout",
-  description: "Tvätt din bil",
+  description: "Boka biltvätt",
   icons: {
     icon: "/favicon.png",
   },
