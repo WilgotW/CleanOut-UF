@@ -302,7 +302,7 @@ export default function BookingPage() {
                           onChange={() => extraSelect(extra.name)}
                         />
                         {extra.name}
-                        {extra.price > 0 && "+" + extra.price + "kr"}
+                        {extra.price > 0 && " +" + extra.price + "kr"}
                       </label>
                     ))}
                   </div>
