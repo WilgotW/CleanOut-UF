@@ -31,7 +31,7 @@ export default function Navbar() {
             width={100}
             height={100}
           />
-          Cleanout
+          CleanOut
         </Link>
       </div>
       <nav className="hidden sm:flex fixed top-0 w-full  shadow-md z-10 bg-white">

@@ -165,10 +165,11 @@ export default function HomeContent({ reviews }: IProps) {
                   </div>
                 ))}
               </div>
-
-              <Link href="/booking" className="text-white xl:text-lg">
-                Boka tvätt
-              </Link>
+              <button className="border p-3 w-fit h-12 rounded hover:bg-[#E36A18] transition-colors hover:border-none">
+                <Link href="/booking" className="text-white xl:text-lg">
+                  Boka tvätt
+                </Link>
+              </button>
             </div>
           </div>
 
