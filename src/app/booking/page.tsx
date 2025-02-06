@@ -44,7 +44,7 @@ export default function BookingPage() {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [plans, setPlans] = useState<Plan[]>([
     {
-      title: "Interior",
+      title: "Insida",
       price: 1000,
       desc: "Ge bilens utsida en snabb uppfräschning.",
       selected: false,
