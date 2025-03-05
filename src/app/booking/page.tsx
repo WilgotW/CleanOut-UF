@@ -65,7 +65,7 @@ export default function BookingPage() {
   const [selectedCarType, setSelectedCarType] = useState<string>("coupe/sudan");
   const [carTypes, setCarTypes] = useState<CarType[]>([
     {
-      name: "coupe/sudan",
+      name: "coupe/sedan",
       price: 0,
       selected: true,
     },
