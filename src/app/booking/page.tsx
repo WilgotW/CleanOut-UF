@@ -46,13 +46,13 @@ export default function BookingPage() {
     {
       title: "Interior",
       price: 1000,
-      desc: "Ge bilens utsida en snabb uppfräschning.",
+      desc: "Fräscha upp insidan av din bil med en grundlig inredningstvätt",
       selected: false,
     },
     {
       title: "Utsida",
       price: 1500,
-      desc: "Fräscha upp insidan av din bil med en grundlig inredningstvätt",
+      desc: "Ge bilens utsida en snabb uppfräschning.",
       selected: false,
     },
     {
