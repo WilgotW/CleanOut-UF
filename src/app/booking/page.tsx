@@ -46,13 +46,13 @@ export default function BookingPage() {
     {
       title: "Insida",
       price: 1000,
-      desc: "Ge bilens utsida en snabb uppfräschning.",
+      desc: "Fräscha upp insidan av din bil med en grundlig inredningstvätt",
       selected: false,
     },
     {
       title: "Utsida",
       price: 1500,
-      desc: "Fräscha upp insidan av din bil med en grundlig inredningstvätt",
+      desc: "Ge bilens utsida en snabb uppfräschning.",
       selected: false,
     },
     {
@@ -65,7 +65,7 @@ export default function BookingPage() {
   const [selectedCarType, setSelectedCarType] = useState<string>("coupe/sudan");
   const [carTypes, setCarTypes] = useState<CarType[]>([
     {
-      name: "coupe/sudan",
+      name: "coupe/sedan",
       price: 0,
       selected: true,
     },
