@@ -45,55 +45,55 @@ export default function BookingPage() {
   const [plans, setPlans] = useState<Plan[]>([
     {
       title: "Insida",
-      price: 1000,
+      price: 100,
       desc: "Fräscha upp insidan av din bil med en grundlig inredningstvätt",
       selected: false,
     },
     {
       title: "Utsida",
-      price: 1500,
+      price: 100,
       desc: "Ge bilens utsida en snabb uppfräschning.",
       selected: false,
     },
     {
       title: "Insida ut",
-      price: 2500,
+      price: 100,
       desc: "fullständig behandling både in- och utvändigt",
       selected: false,
     },
   ]);
-  const [selectedCarType, setSelectedCarType] = useState<string>("coupe/sudan");
+  const [selectedCarType, setSelectedCarType] = useState<string>("coupe/sedan");
   const [carTypes, setCarTypes] = useState<CarType[]>([
     {
       name: "coupe/sedan",
-      price: 0,
+      price: 100,
       selected: true,
     },
     {
       name: "truck/liten suv",
-      price: 200,
+      price: 100,
       selected: false,
     },
     {
       name: "Stor suv",
-      price: 400,
+      price: 100,
       selected: false,
     },
     {
       name: "Skåpbil",
-      price: 600,
+      price: 100,
       selected: false,
     },
   ]);
   const [extraOptions, setExtraOptions] = useState<ExtraOption[]>([
     {
       name: "Tvätt av barnstol",
-      price: 100,
+      price: 50,
       selected: false,
     },
     {
       name: "djurhår borttagning",
-      price: 150,
+      price: 50,
       selected: false,
     },
     {
