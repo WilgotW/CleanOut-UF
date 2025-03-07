@@ -17,6 +17,7 @@ interface Plan {
   price: number;
   desc: string;
   selected: boolean;
+  notAvaible: boolean;
 }
 interface CarType {
   name: string;
@@ -45,28 +46,31 @@ export default function BookingPage() {
   const [plans, setPlans] = useState<Plan[]>([
     {
       title: "Insida",
-      price: 100,
-      desc: "Fräscha upp insidan av din bil med en grundlig inredningstvätt",
+      price: 500,
+      desc: "Fräscha upp insidan av din bil med en inredningstvätt",
       selected: false,
+      notAvaible: false,
     },
     {
       title: "Utsida",
       price: 100,
       desc: "Ge bilens utsida en snabb uppfräschning.",
       selected: false,
+      notAvaible: true,
     },
     {
       title: "Insida ut",
-      price: 100,
+      price: 500,
       desc: "fullständig behandling både in- och utvändigt",
       selected: false,
+      notAvaible: true,
     },
   ]);
   const [selectedCarType, setSelectedCarType] = useState<string>("coupe/sedan");
   const [carTypes, setCarTypes] = useState<CarType[]>([
     {
       name: "coupe/sedan",
-      price: 100,
+      price: 0,
       selected: true,
     },
     {
@@ -76,12 +80,12 @@ export default function BookingPage() {
     },
     {
       name: "Stor suv",
-      price: 100,
+      price: 200,
       selected: false,
     },
     {
       name: "Skåpbil",
-      price: 100,
+      price: 300,
       selected: false,
     },
   ]);
@@ -258,13 +262,21 @@ export default function BookingPage() {
           {plans.map((plan) => (
             <div
               key={plan.title}
-              onClick={() => selectPlan(plan.title)}
+              onClick={() => !plan.notAvaible && selectPlan(plan.title)}
               className={`${
                 plan.selected && "bg-[#E36A18] text-white "
               } h-30 w-full rounded-md shadow-md hover:shadow-xl transition-colors duration-300 p-2 md:p-3 cursor-pointer select-none`}
             >
               <h2 className="font-noto-serif font-extrabold select-none">
-                {plan.title} ({plan.price}kr)
+                {plan.notAvaible ? (
+                  <>
+                    <del>{plan.title}</del> (INTE TILLGÄNGLIG)
+                  </>
+                ) : (
+                  <>
+                    {plan.title} ({plan.price}kr)
+                  </>
+                )}{" "}
               </h2>
               <span className="text-xs m-0 leading-none select-none">
                 {plan.desc}
