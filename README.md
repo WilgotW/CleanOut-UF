@@ -8,10 +8,8 @@ Porgrammed in NextJS.
 
 ----
 ## Link
-The webiste can be visited here: www.Cleanout.se
-
----- 
-## Pictures from website
+The webiste can be visited here: www.Cleanout.se 
+### Pictures from the website
 
 <img width="483" height="1027" alt="image" src="https://github.com/user-attachments/assets/2c92c0e5-1d2d-45e7-ad10-3d925f197ab6" />
 <img width="483" height="1027" alt="image" src="https://github.com/user-attachments/assets/cf1f38b5-05f8-4f55-8d78-ff2febda97e1" />
