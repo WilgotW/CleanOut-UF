@@ -13,7 +13,8 @@ The webiste can be visited here: www.Cleanout.se
 ---- 
 ## Pictures from website
 
-<img width="475" height="705" alt="image" src="https://github.com/user-attachments/assets/b8899904-a611-4367-9e69-be2577b9f870" />
-<img width="475" height="705" alt="image" src="https://github.com/user-attachments/assets/84f866ba-7eb3-4265-a053-eaeb8b6e5bc2" />
-<img width="475" height="705" alt="image" src="https://github.com/user-attachments/assets/2f57dc7b-df1c-46be-879d-173108316506" />
+<img width="483" height="1027" alt="image" src="https://github.com/user-attachments/assets/2c92c0e5-1d2d-45e7-ad10-3d925f197ab6" />
+<img width="483" height="1027" alt="image" src="https://github.com/user-attachments/assets/cf1f38b5-05f8-4f55-8d78-ff2febda97e1" />
+<img width="496" height="1028" alt="image" src="https://github.com/user-attachments/assets/3c845f12-91a1-4d28-89e7-baecf9c35e08" />
+
 
